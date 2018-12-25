@@ -2,12 +2,19 @@ from config import log_file
 from config import file_logging_level
 from config import stream_logging_level
 from config import logging_stdout
+from config import logging_file
 from config import logging_format
 
 import logging
 
-class Logger(logging.getLogger):
-    def __init__(self, name: str=__name__, flevel=file_logging_level, slevel=stream_logging_level, stdout: bool=logging_stdout, format: str=logging_format):
+logger = logging.getLogger()
+print("\n\n\n\n-------------------------")
+print(f"Type: {type(logger)}")
+print(f"Logger: {logger}")
+print("-------------------------\n\n\n\n")
+
+class Logger(logger):
+    def __init__(self, name: str=__name__, flevel=file_logging_level, slevel=stream_logging_level, stdout: bool=logging_stdout, fout: bool=logging_file, format: str=logging_format):
         '''
         An easier Logger object.
         Parameters:
@@ -33,7 +40,7 @@ class Logger(logging.getLogger):
 
         # Add the handlers to the logger
         if stdout: self.addHandler(shandler)
-        self.addHandler(fhandler)
+        if fout: self.addHandler(fhandler)
 
 
     def setFileLevel(self, level: str = "INFO"):
