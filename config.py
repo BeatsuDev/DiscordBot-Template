@@ -15,4 +15,5 @@ log_file = os.path.abspath(os.path.join(os.getcwd(), 'logs.txt'))
 file_logging_level = 'info'
 stream_logging_level = 'warning'
 logging_stdout = True
+logging_file = True
 logging_format = "%(levelname)s:%(asctime)s - %(name)s:%(filename)s:%(message)s"

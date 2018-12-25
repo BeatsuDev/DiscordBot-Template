@@ -1,8 +1,9 @@
-from discord import __verison__ as dversion
+from discord import __version__ as dversion
 from platform import python_version as pversion
 
+from DS.core.Logging import Logger
+
 from DS.core import prefix
-from DS.core import Logger
 
 from config import token
 from config import description

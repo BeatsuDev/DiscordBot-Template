@@ -1,3 +1,3 @@
-from . import bot
-from . import Logging
-from . import cache
+import DS.core.bot
+import DS.core.Logging
+import DS.core.cache
