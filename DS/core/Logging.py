@@ -7,13 +7,7 @@ from config import logging_format
 
 import logging
 
-logger = logging.getLogger()
-print("\n\n\n\n-------------------------")
-print(f"Type: {type(logger)}")
-print(f"Logger: {logger}")
-print("-------------------------\n\n\n\n")
-
-class Logger(logger):
+class Logger(logging.Logger):
     def __init__(self, name: str=__name__, flevel=file_logging_level, slevel=stream_logging_level, stdout: bool=logging_stdout, fout: bool=logging_file, format: str=logging_format):
         '''
         An easier Logger object.
