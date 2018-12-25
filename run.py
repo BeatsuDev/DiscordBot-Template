@@ -3,8 +3,11 @@ from DS.core import DS
 
 import errno
 import sys
+import os
 
 # Yeet
+
+os.system('pip install -r requirements.txt')
 
 if not dversion >= (1, 0):
     print('[CRITICAL ERROR] Wrong version of discord! Please use the rewrite version, version 1.0.0a or above.')
