@@ -8,7 +8,7 @@ from config import token
 from config import description
 from config import pm_help
 
-import arrow
+import discord, arrow, os
 
 if not token:
     token = input("Please enter a valid discord bot token: ")
