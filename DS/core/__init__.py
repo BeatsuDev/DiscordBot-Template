@@ -1,3 +1,2 @@
-import DS.core.bot
-import DS.core.Logging
-import DS.core.cache
+# I wanna add some sort of `from . import Logging`
+# for easier imports
