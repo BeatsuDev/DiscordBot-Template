@@ -1,14 +1,14 @@
 import logging, os
 
 # bot
-token = os.getenv('BotToken') or ''
+token = os.getenv('BotToken') or '<!-- Enter you bot token here -->'
 
 prefix_server = 'd!'
 prefix_dm = ['d!', '']
 description = 'A Discord bot designed to moderate entire servers and guide users through a tutorial of Discord'
 pm_help = True
 
-data_file = os.path.abspath(os.path.join(os.getcwd(), 'data/cache.json'))
+data_file = os.path.abspath(os.path.join(os.getcwd(), 'cache/cache.json'))
 
 # logging
 log_file = os.path.abspath(os.path.join(os.getcwd(), 'logs.log'))
