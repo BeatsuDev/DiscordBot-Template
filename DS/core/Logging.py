@@ -21,9 +21,6 @@ class Logger(logging.Logger):
         self.fhandler = logging.FileHandler(log_file)
         self.shandler = logging.StreamHandler()
 
-        # Set the logger level
-        if level: setLevel(logger, level)
-
         # Set the logging format and the file output handlers
         formatter = logging.Formatter(logging_format)
 
