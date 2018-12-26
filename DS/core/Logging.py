@@ -15,8 +15,8 @@ class Logger(logging.Logger):
         name: str, flevel: str or logging object, stdout: bool and format: str
         '''
         # Set the name of the logger
-        if name: __super__().__init__(name)
-        if not name: __super__().__init__("")
+        if name: super().__init__(name)
+        if not name: super().__init__("")
 
         self.fhandler = logging.FileHandler(log_file)
         self.shandler = logging.StreamHandler()
@@ -26,8 +26,12 @@ class Logger(logging.Logger):
 
         self.shandler.setFormatter(formatter)
         self.fhandler.setFormatter(formatter)
-        self.setStreamLevel(logger, slevel)
-        self.setFileLevel(logger, flevel)
+
+        print(self)
+        print(slevel)
+
+        self.setStreamLevel(self, slevel)
+        self.setFileLevel(self, flevel)
 
         # Add the handlers to the logger
         if stdout: self.addHandler(shandler)

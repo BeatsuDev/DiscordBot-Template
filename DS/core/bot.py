@@ -16,7 +16,7 @@ if not token:
 
 class DS(discord.ext.commands.Bot):
     def __init__(self):
-        __super__().__init__(command_prefix=prefix.getPrefix, description=description, pm_help=pm_help)
+        super().__init__(command_prefix=prefix.getPrefix, description=description, pm_help=pm_help)
         self.logger = Logger(name="bot")
 
     async def track_start(self):
