@@ -1,7 +1,7 @@
 import logging, os
 
 # bot
-token = os.getenv('BotToken', '')
+token = os.getenv('BotToken') or ''
 
 prefix_server = 'd!'
 prefix_dm = ['d!', '']
