@@ -25,7 +25,7 @@ class DS(discord.ext.commands.Bot):
         """
         await self.wait_until_ready()
         self.start_time = arrow.now()
-        self.messages = cache.messages
+        self.messages = cache.get("messages") or 0
 
     async def load_all_extensions(self):
         """
@@ -58,6 +58,8 @@ class DS(discord.ext.commands.Bot):
         self.logger.info(f"------------------------------------------------\n")
 
     async def on_message(self, message):
-        if message.author.id in cache.get(blacklisted): return
+        if message.author.id in cache.get("blacklisted"): return
         if message.author.bot: return
+        self.messages += 1
+        self.cache.save("messages", self.messages)
         self.process_command(message)
