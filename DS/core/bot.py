@@ -10,10 +10,6 @@ from config import pm_help
 
 import discord, arrow, os
 
-if not token:
-    token = input("Please enter a valid discord bot token: ")
-    os.environ["BotToken"] = token
-
 class DS(discord.ext.commands.Bot):
     def __init__(self):
         super().__init__(command_prefix=prefix.getPrefix, description=description, pm_help=pm_help)
