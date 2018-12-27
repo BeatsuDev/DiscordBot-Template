@@ -1,32 +1,41 @@
-from DS.core.Logging import Logger
+from DS.core import Logging
 
 from config import cache_file
 
-import json
-import arrow
+import arrow, json, os
 
 class Cache:
     def __init__(self):
-        self.logger = Logger(name='cache')
-        self.data = self._load_from_file() or {}
-        self.logger.debug("Loaded cache from file. Cache Initiated.")
+        self.logger = Logging.get_logger(name='cache')
+        self.logger.debug("Cache Initiated")
         self.file = cache_file
 
+        try:
+            os.mkdir(self.file)
+            self.logger.info(f"Created directory \"{self.file}\"")
+        except OSError:
+            self.logger.debug(f"Cache file not created; already exists")
+
     async def _load_from_file(self):
+        self.logger.debug("Attempting to load Cache from file")
         with open(self.file, 'r') as cache:
             try:
                 data = json.load(cache)
+                self.logger.info("Loaded Cache from file")
+                self.logger.debug(f"Loaded Cache from file; length: {len(data)}")
             except json.decoder.JSONDecodeError:
-                self.logger.info("Cache file empty!")
+                self.logger.info("Cache file empty")
                 data = {}
-        return data
+            return True
+        self.logger.error(f"Failed to load Cache from file {self.file}")
+        return False
 
     async def _save_to_file():
         with open(self.file, 'w') as cache:
             json.dump(self.data, cache)
             self.logger.debug("Saved cache to file")
             return True
-        self.logger.warning("Error in cache while saving to Cache file.")
+        self.logger.warning("Error in cache while saving to Cache file")
 
     async def save(self, key, value):
         self.data[key] = value
@@ -34,6 +43,7 @@ class Cache:
         _save_to_file()
 
     async def get(self, key):
+        if not self.data: await self._load_from_file()
         req = self.data[key]
         self.logger.debug(f"Requested {req}")
         return req

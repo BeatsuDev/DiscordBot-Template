@@ -1,6 +1,7 @@
 from discord import __version__ as dversion
 
 from DS.core.bot import DS
+from DS.core import Logging
 
 from config import token
 from config import discord_logger_level
@@ -13,11 +14,7 @@ import logging
 
 os.system('pip install -r requirements.txt')
 
-logger = logging.getLogger('discord')
-logger.setLevel(discord_logger_level)
-handler = logging.StreamHandler()
-handler.setFormatter(logging.Formatter(logging_format))
-logger.addHandler(handler)
+logger = Logging.get_logger('discord')
 
 dversion = tuple([int(vnum) for vnum in (re.sub('[^1234567890.]', '', dversion)).split('.')])
 dmajor, dminor, dmicro = dversion
