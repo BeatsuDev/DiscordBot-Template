@@ -33,4 +33,4 @@ if not sys.version_info >= (3, 6):
 
 if __name__ == '__main__':
     bot = DS()
-    DS.run(token)
+    bot.run(token)
