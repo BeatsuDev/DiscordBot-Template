@@ -12,8 +12,6 @@ import logging
 
 # Yeet
 
-os.system('pip install -r requirements.txt')
-
 logger = Logging.get_logger('discord')
 
 dversion = tuple([int(vnum) for vnum in (re.sub('[^1234567890.]', '', dversion)).split('.')])
@@ -29,5 +27,6 @@ if not sys.version_info >= (3, 6):
     exit(errno.EINVAL)
 
 if __name__ == '__main__':
+    os.system('pip install -r requirements.txt')
     bot = DS()
     bot.run(token)
