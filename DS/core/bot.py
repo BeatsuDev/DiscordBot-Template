@@ -1,12 +1,16 @@
+from discord.ext import commands
 from discord import __version__ as dversion
 from platform import python_version as pversion
 
 from DS.core.Logging import Logger
+from DS.core.cache import Cache
 from DS.core import prefix
 
 from config import token
 from config import description
 from config import pm_help
+from config import prefix_dm
+from config import prefix_server
 
 import discord, arrow, os
 
@@ -14,6 +18,7 @@ class DS(discord.ext.commands.Bot):
     def __init__(self):
         super().__init__(command_prefix=prefix.getPrefix, description=description, pm_help=pm_help)
         self.logger = Logger(name="bot")
+        self.cache = Cache()
 
     async def track_start(self):
         """
@@ -39,6 +44,10 @@ class DS(discord.ext.commands.Bot):
                 self.logger.error(f'Failed to load extension; {error}')
             print('-' * 10)
 
+    async def getPrefix(self, message):
+        if not message.guild: return commands.when_mentioned_or(*prefix_dm)(self, message)
+        return commands.when_mentioned_or(*prefix_server)(self, message)
+
     async def on_ready(self):
         self.app_info = await self.application_info()
         self.logger.info("\n\n-------------------------------------------------")
@@ -48,3 +57,8 @@ class DS(discord.ext.commands.Bot):
         self.logger.info(f"Running Discord {dversion} - Python {pversion()}")
         self.logger.info(f"ID: self.user.id")
         self.logger.info(f"------------------------------------------------\n")
+
+    async def on_message(self, message):
+        if message.author.id in cache.get(blacklisted): return
+        if message.author.bot: return
+        self.process_command(message)
