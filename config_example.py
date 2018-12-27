@@ -14,6 +14,7 @@ cache_file = os.path.abspath(os.path.join(os.getcwd(), 'cache/cache.json'))
 log_file = os.path.abspath(os.path.join(os.getcwd(), 'logs.log'))
 file_logging_level = logging.INFO
 stream_logging_level = logging.INFO
+discord_logging_level = logging.WARNING
 logging_stdout = True
 logging_file = True
 logging_format = "%(levelname)s:%(asctime)s - %(name)s:%(filename)s:%(message)s"

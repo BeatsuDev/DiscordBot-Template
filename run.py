@@ -4,7 +4,7 @@ from DS.core.bot import DS
 from DS.core import Logging
 
 from config import token
-from config import discord_logger_level
+from config import discord_logging_level
 from config import logging_format
 
 import errno, sys, os, re
