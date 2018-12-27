@@ -22,20 +22,16 @@ class Logger(logging.Logger):
         self.shandler = logging.StreamHandler()
 
         # Set the logging format and the file output handlers
-        formatter = logging.Formatter(logging_format)
+        self.formatter = logging.Formatter(logging_format)
 
-        self.shandler.setFormatter(formatter)
-        self.fhandler.setFormatter(formatter)
-
-        print(self)
-        print(slevel)
-
-        self.setStreamLevel(self, slevel)
-        self.setFileLevel(self, flevel)
+        self.shandler.setFormatter(self.formatter)
+        self.fhandler.setFormatter(self.formatter)
+        self.setStreamLevel(slevel)
+        self.setFileLevel(flevel)
 
         # Add the handlers to the logger
-        if stdout: self.addHandler(shandler)
-        if fout: self.addHandler(fhandler)
+        if stdout: self.addHandler(self.shandler)
+        if fout: self.addHandler(self.fhandler)
 
 
     def setFileLevel(self, level: str = "INFO"):
@@ -43,21 +39,25 @@ class Logger(logging.Logger):
         Sets the level of a logger from a string value of
         the wanted level.
         '''
-        level = level.lower()
-        if level == "debug": self.fhandler.setLevel(logging.DEBUG)
-        if level == "info": self.fhandler.setLevel(logging.INFO)
-        if level == "warning": self.fhandler.setLevel(logging.WARNING)
-        if level == "error": self.fhandler.setLevel(logging.ERROR)
-        if level == "critical": self.fhandler.setLevel(logging.CRITICAL)
+        bypass = False
+        if isinstance(level, str): level = level.lower()
+        if isinstance(level, int): bypass = True
+        if level == "debug" or bypass == True: self.fhandler.setLevel(logging.DEBUG)
+        if level == "info" or bypass == True: self.fhandler.setLevel(logging.INFO)
+        if level == "warning" or bypass == True: self.fhandler.setLevel(logging.WARNING)
+        if level == "error" or bypass == True: self.fhandler.setLevel(logging.ERROR)
+        if level == "critical" or bypass == True: self.fhandler.setLevel(logging.CRITICAL)
 
     def setStreamLevel(self, level: str = "INFO"):
         '''
         Sets the level of a logger from a string value of
         the wanted level.
         '''
-        level = level.lower()
-        if level == "debug": self.shandler.setLevel(logging.DEBUG)
-        if level == "info": self.shandler.setLevel(logging.INFO)
-        if level == "warning": self.shandler.setLevel(logging.WARNING)
-        if level == "error": self.shandler.setLevel(logging.ERROR)
-        if level == "critical": self.shandler.setLevel(logging.CRITICAL)
+        bypass = False
+        if isinstance(level, str): level = level.lower()
+        if isinstance(level, int): bypass = True
+        if level == "debug" or bypass == True: self.shandler.setLevel(logging.DEBUG)
+        if level == "info" or bypass == True: self.shandler.setLevel(logging.INFO)
+        if level == "warning" or bypass == True: self.shandler.setLevel(logging.WARNING)
+        if level == "error" or bypass == True: self.shandler.setLevel(logging.ERROR)
+        if level == "critical" or bypass == True: self.shandler.setLevel(logging.CRITICAL)
