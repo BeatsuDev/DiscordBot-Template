@@ -8,7 +8,7 @@ prefix_dm = ['d!', '']
 description = 'A Discord bot designed to moderate entire servers and guide users through a tutorial of Discord'
 pm_help = True
 
-data_file = os.path.abspath(os.path.join(os.getcwd(), 'cache/cache.json'))
+cache_file = os.path.abspath(os.path.join(os.getcwd(), 'cache/cache.json'))
 
 # logging
 log_file = os.path.abspath(os.path.join(os.getcwd(), 'logs.log'))

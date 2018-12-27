@@ -1,4 +1,4 @@
-from DS.core import Logger
+from DS.core.Logging import Logger
 
 from config import cache_file
 
@@ -8,7 +8,7 @@ import arrow
 class Cache:
     def __init__(self):
         self.logger = Logger(name='cache')
-        self.data = await self._load_from_file() or {}
+        self.data = self._load_from_file() or {}
         self.logger.debug("Loaded cache from file. Cache Initiated.")
         self.file = cache_file
 

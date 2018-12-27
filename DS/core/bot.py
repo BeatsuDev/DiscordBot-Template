@@ -4,7 +4,6 @@ from platform import python_version as pversion
 
 from DS.core.Logging import Logger
 from DS.core.cache import Cache
-from DS.core import prefix
 
 from config import token
 from config import description
@@ -16,7 +15,7 @@ import discord, arrow, os
 
 class DS(discord.ext.commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix=prefix.getPrefix, description=description, pm_help=pm_help)
+        super().__init__(command_prefix=self.getPrefix, description=description, pm_help=pm_help)
         self.logger = Logger(name="bot")
         self.cache = Cache()
 
