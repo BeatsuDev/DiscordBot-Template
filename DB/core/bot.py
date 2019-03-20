@@ -13,7 +13,7 @@ from config import prefix_server
 
 import discord, arrow, os
 
-class DS(discord.ext.commands.Bot):
+class DB(discord.ext.commands.Bot):
     def __init__(self):
         super().__init__(command_prefix=self.getPrefix, description=description, pm_help=pm_help)
         self.logger = Logging.get_logger("bot")
@@ -33,7 +33,7 @@ class DS(discord.ext.commands.Bot):
         """
         await self.wait_until_ready()
         await asyncio.sleep(1)  # ensure that on_ready has completed and finished printing
-        cogs = [x.stem for x in os.abspath(join(os.getcwd(), "DS/cogs")).glob('*.py')]
+        cogs = [x.stem for x in os.abspath(join(os.getcwd(), "DB/cogs")).glob('*.py')]
         for extension in cogs:
             try: self.load_cog(f'cogs.{extension}')
             except Exception as e:

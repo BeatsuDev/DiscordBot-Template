@@ -40,15 +40,22 @@ class Cache:
     async def save(self, key, value):
         self.data[key] = value
         self.logger.debug(f"{key} with the value {value} was saved to the Cache")
-        _save_to_file()
+        self._save_to_file()
 
     async def get(self, key):
+        req = None
         if not self.data: await self._load_from_file()
-        req = self.data[key]
-        self.logger.debug(f"Requested {req}")
+        try:
+            req = self.data[key]
+            self.logger.debug(f"Requested {req}")
+        except KeyError:
+            self.logger.info(f"Requested key \"{key}\" not found.")
         return req
 
     async def delete(self):
-        req = self.data.pop(key, none)
-        self.logger.debug(f"Deleted {key} with value {self.data[key]}")
+        try:
+            req = self.data.pop(key, none)
+            self.logger.debug(f"Deleted {key} with value {self.data[key]}")
+        except KeyError:
+            self.logger.info(f"Deletion of key \"{key}\" not succesfull. Key not found.")
         return req

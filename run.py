@@ -1,7 +1,7 @@
 from discord import __version__ as dversion
 
-from DS.core.bot import DS
-from DS.core import Logging
+from DB.core.bot import DB
+from DB.core import Logging
 
 from config import token
 from config import discord_logging_level
@@ -28,5 +28,5 @@ if not sys.version_info >= (3, 6):
 
 if __name__ == '__main__':
     os.system('pip install -r requirements.txt')
-    bot = DS()
+    bot = DB()
     bot.run(token)
